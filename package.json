@@ -25,7 +25,9 @@
   },
   "homepage": "https://github.com/Dan88Hus/ElectronReactAria2#readme",
   "devDependencies": {
-    "electron": "^14.0.1"
+    "electron": "^14.0.1",
+    "electron-devtools-installer": "^3.2.0",
+    "electron-reload": "^2.0.0-alpha.1"
   },
   "dependencies": {
     "@babel/core": "^7.15.5",
