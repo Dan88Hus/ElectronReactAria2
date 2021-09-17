@@ -9,7 +9,7 @@
     "watch": "webpack --config webpack.common.js --watch"
   },
   "repository": {
-    "type": "git",
+    "type": "commonjs",
     "url": "git+https://github.com/Dan88Hus/ElectronReactAria2.git"
   },
   "keywords": [

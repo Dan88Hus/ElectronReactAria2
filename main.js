@@ -15,7 +15,9 @@ function createWindow() {
         minHeight: 400,
         backgroundColor: 'white',
         webPreferences :{
-            nativeWindowOpen : true
+            nativeWindowOpen : true,
+            nodeIntegration: true,
+            contextIsolation: false
         }
     })
 
