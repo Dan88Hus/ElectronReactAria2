@@ -25,5 +25,9 @@
   "homepage": "https://github.com/Dan88Hus/ElectronReactAria2#readme",
   "devDependencies": {
     "electron": "^14.0.1"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
