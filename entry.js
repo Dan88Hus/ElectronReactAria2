@@ -8,14 +8,27 @@ const options = {
     secure: false,
     secret: 'secret',
     path: '/jsonrpc',
-  }
+}
 
 const aria2 = new Aria2({ WebSocket: ws, fetch: nodefetch, ...options });
-console.log("HERE")
 
 aria2
-  .open()
-  .then(() => console.log("CONNECTED TO ARIA2"))
-  .catch((err) => console.log("error", err));
+    .open()
+    .then(() => console.log("CONNECTED TO ARIA2"))
+    .catch((err) => console.log("error", err));
 
+aria2.listNotifications().then((list) => {
+    console.log(list)
+    list.forEach((notification) => {
+        console.log("here")
+        aria2.on(notification, (params) => {
+            console.log('aria2', notification, params)
+        })
+    })
+
+})
+
+aria2.listMethods().then((lm)=>{
+    console.log(lm)
+})
 console.log(aria2)

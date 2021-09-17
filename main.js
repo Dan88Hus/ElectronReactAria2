@@ -17,6 +17,7 @@ function createWindow() {
         webPreferences :{
             nativeWindowOpen : true,
             nodeIntegration: true,
+            worldSafeExecuteJavascript: true,
             contextIsolation: false
         }
     })
