@@ -1,0 +1,29 @@
+{
+  "name": "aria-react",
+  "version": "1.0.0",
+  "description": "aria2-react-electron",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dan88Hus/ElectronReactAria2.git"
+  },
+  "keywords": [
+    "aria2",
+    "electron",
+    "react",
+    "webpack"
+  ],
+  "author": "HuseyinOZDOGAN",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dan88Hus/ElectronReactAria2/issues"
+  },
+  "homepage": "https://github.com/Dan88Hus/ElectronReactAria2#readme",
+  "devDependencies": {
+    "electron": "^14.0.1"
+  }
+}
