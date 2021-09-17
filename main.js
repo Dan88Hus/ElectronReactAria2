@@ -14,8 +14,8 @@ function createWindow() {
         minWidth: 360,
         minHeight: 400,
         backgroundColor: 'white',
-        webPreferences: {
-            nativeWindowOpen: true // ADD THIS
+        webPreferences :{
+            nativeWindowOpen : true
         }
     })
 
@@ -30,10 +30,10 @@ function createWindow() {
     isDev && mainWindow.webContents.openDevTools()
     // reload configuration
     if (isDev) {
-        console.log("isDev")
         require('electron-reload')(__dirname, {
-            electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
-        })
+            electron: path.join(__dirname, 'node_modules', '.bin', 'electron'), hardResetMethod: 'exit'
+            // electron: require(`${__dirname}/node_modules/electron`)
+            })
     } else {
         console.log("!isDev")
     }
@@ -42,12 +42,12 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
     // add react developer tools to chromium
-    installExtension(REDUX_DEVTOOLS)
+    isDev && installExtension(REDUX_DEVTOOLS)
         .then((name) => console.log(`Added Extension:  ${name}`))
         .catch((err) => console.log('An error occurred: ', err))
     createWindow()
+    
 })
-
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
     // On MacOS X it is common for applications and their menu bar
