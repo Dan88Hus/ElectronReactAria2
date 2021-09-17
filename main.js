@@ -1,7 +1,9 @@
+const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer')
 const { app, BrowserWindow } = require("electron")
 
 const path = require('path')
 const url = require('url')
+const isDev = !app.isPackaged
 
 let mainWindow
 
@@ -11,7 +13,10 @@ function createWindow() {
         height: 800,
         minWidth: 360,
         minHeight: 400,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        webPreferences: {
+            nativeWindowOpen: true // ADD THIS
+        }
     })
 
     // load the index.html of the app.
@@ -22,15 +27,24 @@ function createWindow() {
     }))
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    isDev && mainWindow.webContents.openDevTools()
+    // reload configuration
+    if (isDev) {
+        console.log("isDev")
+        require('electron-reload')(__dirname, {
+            electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
+        })
+    } else {
+        console.log("!isDev")
+    }
 }
 
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
     // add react developer tools to chromium
-    // installExtension(REACT_DEVELOPER_TOOLS)
-    // .then((name) => console.log(`Added Extension:  ${name}`))
-    // .catch((err) => console.log('An error occurred: ', err))
+    installExtension(REDUX_DEVTOOLS)
+        .then((name) => console.log(`Added Extension:  ${name}`))
+        .catch((err) => console.log('An error occurred: ', err))
     createWindow()
 })
 
