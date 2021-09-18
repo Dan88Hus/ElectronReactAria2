@@ -1,6 +1,7 @@
 import Aria2 from "aria2";
 import ws from "ws";
 import nodefetch from "node-fetch";
+import axios from "axios";
 
 const options = {
     host: 'localhost',
@@ -14,13 +15,35 @@ const aria2 = new Aria2({ WebSocket: ws, fetch: nodefetch, ...options });
 
 
 
-export const addUriAction = (link) => async (dispatch, getState) =>{
-    aria2.listMethods().addUri = link
-    console.log("LINK",link)
-    dispatch({
-        type: "ADDURI",
-        payload: await aria2.listMethods().addUri
-    })
+export const addUriAction = (link) => async (dispatch, getState) => {
+    var data = `{"id": "${Math.floor(Math.random() * 1000000000)}","jsonrpc":"2.0","method": "aria2.addUri", "params": [["${link}"]]}`;
+    // console.log("LINK", link, "data", data)
+
+    var config = {
+        method: 'post',
+        url: 'http://127.0.0.1:6800/jsonrpc',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        data: data
+    };
+
+    await axios(config)
+        .then(function (response) {
+            console.log(response.data.id);
+            dispatch({
+                type: "ADDURI",
+                payload:{
+                    id: response.data.id,
+                    gid: response.data.result
+                }
+            })
+        })
+        .catch(function (error) {
+            console.log(error.message);
+        });
+
+
 
 }
 

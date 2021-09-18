@@ -31,24 +31,27 @@ aria2.listNotifications().then((list) => {
 //     console.log("List Methods:",lm)
 // })
 
-console.log("Aria2",aria2)
+// console.log("Aria2",aria2)
 
-var data = '{"id":"100000111","jsonrpc":"2.0","method": "aria2.addUri", "params": [["https://file-examples-com.github.io/uploads/2017/10/file-example_PDF_1MB.pdf"]]}';
 
-var config = {
-  method: 'post',
-  url: 'http://localhost:6800/jsonrpc',
-  headers: { 
-    'Content-Type': 'text/plain'
-  },
-  data : data
-};
+// addUri methods ####################################################################
 
-axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
+// var data = '{"id":"100000111","jsonrpc":"2.0","method": "aria2.addUri", "params": [["https://file-examples-com.github.io/uploads/2017/10/file-example_PDF_1MB.pdf"]]}';
 
+// var config = {
+//   method: 'post',
+//   url: 'http://localhost:6800/jsonrpc',
+//   headers: { 
+//     'Content-Type': 'text/plain'
+//   },
+//   data : data
+// };
+
+// axios(config)
+// .then(function (response) {
+//   console.log(JSON.stringify(response.data));
+// })
+// .catch(function (error) {
+//   console.log(error);
+// });
+// addUri ends ###############################################################################
