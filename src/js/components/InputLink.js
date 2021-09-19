@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { addUriAction } from '../store/actions/taskActions'
+import { addUriAction, tellStatus } from '../store/actions/taskActions'
 
 function InputLink() {
     const [link, setLink] = useState('')
     const dispatch = useDispatch()
     const uri = useSelector((state)=> state)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         // dispatch edilecek
-        dispatch(addUriAction(link))
-        
+        await dispatch(addUriAction(link))
     }
 
     return (

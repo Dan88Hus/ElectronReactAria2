@@ -44,31 +44,8 @@ export const addUriAction = (link) => async (dispatch, getState) => {
 }
 
 export const tellStatus = () => async (dispatch, getState) => {
-    var data = `{"id":"${getState.id}","jsonrpc":"2.0","method": "aria2.tellStatus", "params": ["${getState.gid}"]}`;
-    var config = {
-        method: 'post',
-        url: 'http://localhost:6800/jsonrpc',
-        headers: {
-            'Content-Type': 'text/plain'
-        },
-        data: data
-    };
-
-    axios(config)
-        .then(function (response) {
-            console.log("RESPONSE",JSON.stringify(response.data));
-            dispatch({
-                type: "TELLSTATUS",
-                payload: {
-                    id: response.data.id,
-                    gid: response.data.result.gid,
-                    status: response.data.status.status
-                }
-            })
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-
-
+    console.log("tellStatus started")
+    dispatch({
+        type: "TELLSTATUS",
+    })
 }
