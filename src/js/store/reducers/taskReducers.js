@@ -22,7 +22,7 @@ export const taskReducer = (state = [], action) => {
                 const fetchStatus = async() => await axios(config)
                     .then(function (response) {
                         if(response.data.id === task.id){
-                            let progressPercent = (response.data.result.completedLength / response.data.result.totalLength)*100
+                            let progressPercent = ((response.data.result.completedLength / response.data.result.totalLength)*100).toFixed(2)
                             console.log("they are equal", typeof(state), "PP:", progressPercent)  
                             Object.assign(task, {status: response.data.result.status, progress: progressPercent, path: response.data.result.files[0].path})     
                         }
@@ -32,6 +32,8 @@ export const taskReducer = (state = [], action) => {
                     });
                 fetchStatus()
             })
+            return [...state]
+        case "PAUSE":
             return [...state]
         default:
             return state

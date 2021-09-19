@@ -14,10 +14,8 @@ const options = {
 const aria2 = new Aria2({ WebSocket: ws, fetch: nodefetch, ...options });
 
 
-
 export const addUriAction = (link) => async (dispatch, getState) => {
     let data = `{"id": "${Math.floor(Math.random() * 1000000000)}","jsonrpc":"2.0","method": "aria2.addUri", "params": [["${link}"]]}`;
-
     let config = {
         method: 'post',
         url: 'http://127.0.0.1:6800/jsonrpc',
@@ -26,7 +24,7 @@ export const addUriAction = (link) => async (dispatch, getState) => {
         },
         data: data
     };
-
+    
     await axios(config)
         .then(function (response) {
             console.log(response.data.id);
@@ -48,4 +46,31 @@ export const tellStatus = () => async (dispatch, getState) => {
     dispatch({
         type: "TELLSTATUS",
     })
+}
+
+
+export const pauseAction = (id, gid) => async (dispatch, getState) => {
+
+    console.log("pauseAction Called", id, 'GID', gid)
+
+    let data = `{"id":"${id}","jsonrpc":"2.0","method": "aria2.pause", "params": ["${gid}"]}`;
+    let config = {
+        method: 'post',
+        url: 'http://127.0.0.1:6800/jsonrpc',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        data: data
+    };
+    axios(config)
+        .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            dispatch({
+                type: "PAUSE",
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from "react-redux";
-import { tellStatus } from '../store/actions/taskActions'
+import { tellStatus, pauseAction } from '../store/actions/taskActions'
 
 
 
@@ -12,7 +12,20 @@ function ListHistory({ u }) {
             dispatch(tellStatus())
         }, 3000);
     }, [])
-    let char = ">"
+    
+    const handlePause = ()=>{
+        if(u.status !== "complete"){
+            console.log("dispatch for pause")
+            dispatch(pauseAction(u.id, u.gid))
+        }
+    }
+    const handleResume = ()=>{
+        if(u.status !== "complete"){
+            console.log("dispatch for resume")
+            // dispatch
+        }
+    }
+
     return (
         <React.Fragment>
             <tr>
@@ -21,8 +34,8 @@ function ListHistory({ u }) {
                 <td className="text-center">{u.progress}</td>
                 <td>{u.path}</td>
                 {/* This can be in one Button */}
-                <td><button className="btn bt-light">||</button></td>
-                <td><button className="btn btn-light">&#9656;</button></td>
+                <td><button className="btn btn-light" onClick={handlePause}>||</button></td>
+                <td><button className="btn btn-light" onClick={handleResume}>&#9656;</button></td>
             </tr>
         </React.Fragment>
     )
