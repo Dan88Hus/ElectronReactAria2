@@ -16,10 +16,9 @@ const aria2 = new Aria2({ WebSocket: ws, fetch: nodefetch, ...options });
 
 
 export const addUriAction = (link) => async (dispatch, getState) => {
-    var data = `{"id": "${Math.floor(Math.random() * 1000000000)}","jsonrpc":"2.0","method": "aria2.addUri", "params": [["${link}"]]}`;
-    // console.log("LINK", link, "data", data)
+    let data = `{"id": "${Math.floor(Math.random() * 1000000000)}","jsonrpc":"2.0","method": "aria2.addUri", "params": [["${link}"]]}`;
 
-    var config = {
+    let config = {
         method: 'post',
         url: 'http://127.0.0.1:6800/jsonrpc',
         headers: {
@@ -33,7 +32,7 @@ export const addUriAction = (link) => async (dispatch, getState) => {
             console.log(response.data.id);
             dispatch({
                 type: "ADDURI",
-                payload:{
+                payload: {
                     id: response.data.id,
                     gid: response.data.result
                 }
@@ -42,11 +41,34 @@ export const addUriAction = (link) => async (dispatch, getState) => {
         .catch(function (error) {
             console.log(error.message);
         });
+}
 
+export const tellStatus = () => async (dispatch, getState) => {
+    var data = `{"id":"${getState.id}","jsonrpc":"2.0","method": "aria2.tellStatus", "params": ["${getState.gid}"]}`;
+    var config = {
+        method: 'post',
+        url: 'http://localhost:6800/jsonrpc',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        data: data
+    };
+
+    axios(config)
+        .then(function (response) {
+            console.log("RESPONSE",JSON.stringify(response.data));
+            dispatch({
+                type: "TELLSTATUS",
+                payload: {
+                    id: response.data.id,
+                    gid: response.data.result.gid,
+                    status: response.data.status.status
+                }
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
 
 }
-
-// aria2.listMethods().then((lm)=>{
-//     console.log("List2 Methods:",lm)
-// })

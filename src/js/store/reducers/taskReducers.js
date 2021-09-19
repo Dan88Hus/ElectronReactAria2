@@ -1,13 +1,16 @@
 
-const INITIAL_STATE ={
-    id:0, gid: 0
-}
+// const taskReducer_STATE =[
+    // will keep id:0, and  gid: 0
+// ]
 
 
-export const taskReducer = (state = INITIAL_STATE, action) =>{
+export const taskReducer = (state =[], action) =>{
     switch (action.type){
         case "ADDURI":
-            return [action.payload]
+            return [...state, action.payload]
+        case "TELLSTATUS":
+            console.log("STATE,", ...state)     
+            return [...state] 
         default:
             return state
     }

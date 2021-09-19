@@ -1,14 +1,19 @@
-import React from 'react'
+import React,{useEffect} from 'react'
+import { useDispatch } from "react-redux";
+import { tellStatus } from '../store/actions/taskActions'
 
-function ListHistory() {
+
+function ListHistory({u}) {
+    const dispatch = useDispatch()
+
+    // useEffect(()=>{
+    //     dispatch(tellStatus())
+    // },[dispatch])
+
     return (
-        <div className="card m-3">
-            <ul className="list-group list-group-flush">
-                <li className="list-group-item">An item</li>
-                <li className="list-group-item">A second item</li>
-                <li className="list-group-item">A third item</li>
-            </ul>
-        </div>
+        <React.Fragment>
+                <li className="list-group-item">GID: {u.gid}</li>
+        </React.Fragment>
     )
 }
 
