@@ -21,10 +21,10 @@ export const taskReducer = (state = [], action) => {
                 };
                 const fetchStatus = async() => await axios(config)
                     .then(function (response) {
-                        console.log("TASK ID",task.id)
                         if(response.data.id === task.id){
-                            console.log("they are equal", typeof(state))  
-                            Object.assign(task, {status: response.data.result.status, path: response.data.result.files[0].path})     
+                            let progressPercent = (response.data.result.completedLength / response.data.result.totalLength)*100
+                            console.log("they are equal", typeof(state), "PP:", progressPercent)  
+                            Object.assign(task, {status: response.data.result.status, progress: progressPercent, path: response.data.result.files[0].path})     
                         }
                 })
                     .catch(function (error) {

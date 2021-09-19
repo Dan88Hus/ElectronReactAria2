@@ -22,15 +22,25 @@ function App() {
                 <div className="row">
                     <InputLink />
                 </div>
-                <div className="card m-3" >
-                    {uri.map((u) => (
-                        <ListHistory u={u} key={u.id}/>
-                    ))}
-                </div>
-
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">GID</th>
+                            <th scope="col">Status</th>
+                            <th scope="col text-center">%Progress</th>
+                            <th scope="col">Path</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {uri.map((u) => (
+                            <ListHistory u={u} key={u.id} />
+                        ))}
+                    </tbody>
+                </table>
                 <pre>{JSON.stringify(uri)}</pre>
             </div>
-        </div>
+        </div >
     )
 }
 
