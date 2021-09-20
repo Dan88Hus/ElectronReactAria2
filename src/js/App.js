@@ -1,14 +1,23 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import entry from '../../entry'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import TaskButtons from './components/TaskButtons'
 import InputLink from './components/InputLink'
 import ListHistory from './components/ListHistory'
+import { updateLocalSaction } from './store/actions/taskActions'
 
 
 function App() {
+    const dispatch = useDispatch()
+    const stateU = useSelector(state => state.uri)
     const uri = useSelector(state => state.uri)
+
+    useEffect(()=>{
+        console.log("app useEffect")
+        console.log("STATE", stateU)
+        dispatch(updateLocalSaction())
+    },[])
 
     return (
         <div className="container-fluid">

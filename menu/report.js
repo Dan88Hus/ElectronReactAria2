@@ -9,14 +9,14 @@ const pathTd = document.getElementById('pathTd')
 const tbody = document.getElementById('tbody')
 
 if(localSItems){
-    let objectLength = Object.values(objLocalSItems).length
-    // because status,progress and path makes 3
-    for (let i = 0; i < (objectLength/3); i++) {
+    let objectLength = Object.values(objLocalSItems.uri).length
+    // because id, gid, status,progress and path makes 5
+    for (let i = 0; i < (objectLength/5); i++) {
         console.log(i)
         let newRow = tbody.insertRow(i);
         for (let j = 0; j < objectLength; j++){
             let newCell = newRow.insertCell(j);
-            let newText = document.createTextNode(`${Object.values(objLocalSItems)[j]}`)
+            let newText = document.createTextNode(`${Object.values(objLocalSItems.uri)[j]}`)
             newCell.appendChild(newText)
         }
     }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from "react-redux";
-import { tellStatus, pauseAction } from '../store/actions/taskActions'
+import { tellStatus, pauseAction, updateLocalSaction } from '../store/actions/taskActions'
 
 
 
@@ -8,20 +8,23 @@ function ListHistory({ u }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        console.log("ListHistory useEffect")
+        // dispatch(updateLocalSaction())
         const interval = setInterval(() => {
             dispatch(tellStatus())
         }, 3000);
     }, [])
     
+    
     const handlePause = ()=>{
         if(u.status !== "complete"){
-            console.log("dispatch for pause")
+            // console.log("dispatch for pause")
             dispatch(pauseAction(u.id, u.gid))
         }
     }
     const handleResume = ()=>{
         if(u.status !== "complete"){
-            console.log("dispatch for resume")
+            // console.log("dispatch for resume")
             // dispatch
         }
     }

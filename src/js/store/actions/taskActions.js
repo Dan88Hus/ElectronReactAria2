@@ -74,3 +74,11 @@ export const pauseAction = (id, gid) => async (dispatch, getState) => {
         });
 
 }
+
+export const updateLocalSaction = () => async (dispatch, getState) => {
+
+    console.log("updateLocalSaction Called")
+    dispatch({
+        type: "UPDATEreduxSTORE",
+    })
+}

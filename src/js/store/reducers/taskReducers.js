@@ -23,9 +23,12 @@ export const taskReducer = (state = [], action) => {
                     .then(function (response) {
                         if(response.data.id === task.id){
                             let progressPercent = ((response.data.result.completedLength / response.data.result.totalLength)*100).toFixed(2)
-                            console.log("they are equal", typeof(state), "PP:", progressPercent)  
+                            // console.log("they are equal", typeof(state), "PP:", progressPercent)  
+                            // console.log("TELLSTATUS RESPONSE",response.data.result.gid)
                             Object.assign(task, {status: response.data.result.status, progress: progressPercent, path: response.data.result.files[0].path})   
-                            localStorage.getItem('ERA') ? localStorage.removeItem('ERA') : localStorage.setItem('ERA',JSON.stringify({status: response.data.result.status, progress: progressPercent, path: response.data.result.files[0].path}))
+                            //old localStorage.getItem('ERA') ? localStorage.removeItem('ERA') : localStorage.setItem('ERA',JSON.stringify({id: task.id ,gid: response.data.result.gid, status: response.data.result.status, progress: progressPercent, path: response.data.result.files[0].path}))
+                            //new localStorage.getItem('ERA') ? localStorage.removeItem('ERA') : localStorage.setItem('ERA',JSON.stringify({uri: [{id: task.id ,gid: response.data.result.gid, status: response.data.result.status, progress: progressPercent, path: response.data.result.files[0].path}]}))
+
                         }
                 })
                     .catch(function (error) {
@@ -36,6 +39,8 @@ export const taskReducer = (state = [], action) => {
             return [...state]
         case "PAUSE":
             return [...state]
+        case "UPDATEreduxSTORE":
+            // return localStorage.getItem('ERA') && {...JSON.parse(localStorage.getItem('ERA')), ...state}            
         default:
             return state
     }
