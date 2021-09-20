@@ -24,7 +24,8 @@ export const taskReducer = (state = [], action) => {
                         if(response.data.id === task.id){
                             let progressPercent = ((response.data.result.completedLength / response.data.result.totalLength)*100).toFixed(2)
                             console.log("they are equal", typeof(state), "PP:", progressPercent)  
-                            Object.assign(task, {status: response.data.result.status, progress: progressPercent, path: response.data.result.files[0].path})     
+                            Object.assign(task, {status: response.data.result.status, progress: progressPercent, path: response.data.result.files[0].path})   
+                            localStorage.getItem('ERA') ? localStorage.removeItem('ERA') : localStorage.setItem('ERA',JSON.stringify({status: response.data.result.status, progress: progressPercent, path: response.data.result.files[0].path}))
                         }
                 })
                     .catch(function (error) {

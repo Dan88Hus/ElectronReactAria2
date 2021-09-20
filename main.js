@@ -1,8 +1,9 @@
 const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer')
-const { app, BrowserWindow } = require("electron")
+const { app, BrowserWindow, Menu, Tray } = require("electron")
 
 const path = require('path')
 const url = require('url')
+const trayIcon = path.join(__dirname, 'assets', 'images', 'downloadicon.ico');
 const isDev = !app.isPackaged
 
 let mainWindow
@@ -10,12 +11,12 @@ let mainWindow
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 1200,
-        height: 800,
+        height: 900,
         minWidth: 360,
         minHeight: 400,
         backgroundColor: 'white',
-        webPreferences :{
-            nativeWindowOpen : true,
+        webPreferences: {
+            // nativeWindowOpen: true,
             nodeIntegration: true,
             worldSafeExecuteJavascript: true,
             contextIsolation: false
@@ -36,20 +37,34 @@ function createWindow() {
         require('electron-reload')(__dirname, {
             electron: path.join(__dirname, 'node_modules', '.bin', 'electron'), hardResetMethod: 'exit'
             // electron: require(`${__dirname}/node_modules/electron`)
-            })
+        })
     } else {
         console.log("!isDev")
     }
 }
 
+if (process.platform === 'darwin') {
+    app.dock.setIcon(trayIcon);
+}
+let tray = null
+
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
+    // creates Menu
+    const template = require('./menu/Menu').createTemplate(app)
+    const menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
+    // tray icon is not working on Linux
+    if (process.platform === 'darwin'){
+        tray = new Tray('/assets/images/downloadicon.ico')
+        tray.setContextMenu(menu)
+    }
     // add react developer tools to chromium
     isDev && installExtension(REDUX_DEVTOOLS)
         .then((name) => console.log(`Added Extension:  ${name}`))
         .catch((err) => console.log('An error occurred: ', err))
     createWindow()
-    
+
 })
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
