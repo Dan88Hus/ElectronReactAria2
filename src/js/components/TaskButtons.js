@@ -2,7 +2,7 @@ import React from 'react'
 import configureStore from '../store/store'
 const { persistor } = configureStore();
 import {useDispatch} from 'react-redux'
-import {purgeLocalStorage} from '../store/actions/taskActions'
+import {purgeLocalStorage, forcePauseAllAction} from '../store/actions/taskActions'
 
 
 
@@ -15,10 +15,14 @@ function TaskButtons() {
         await persistor.purge()
 
     }
+    const handleClickPause = () =>{
+        console.log("pauseAll clicked")
+        dispatch(forcePauseAllAction(0,0))
+    }
 
     return (
         <div className="m-2 text-center">
-            <li className="btn btn-secondary m-1">Pasuse All</li>
+            <li className="btn btn-secondary m-1" onClick={handleClickPause}>Pasuse All</li>
             <li className="btn btn-secondary m-1" onClick={handleClickClear}>Clear History</li>
         </div>
     )

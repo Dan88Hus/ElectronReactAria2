@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import {unPauseAllAction} from './store/actions/taskActions'
 
 import TaskButtons from './components/TaskButtons'
 import InputLink from './components/InputLink'
@@ -13,6 +14,8 @@ function App() {
 
     useEffect(()=>{
         console.log("app useEffect")
+        // 0,0 is dummy data
+        dispatch(unPauseAllAction(0,0))
     },[])
 
     return (

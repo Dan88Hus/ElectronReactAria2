@@ -41,6 +41,10 @@ export const taskReducer = (state = [], action) => {
             return [...state]
         case "FORCEREMOVE" :
             return [...state]
+        case "UNPAUSEALL":
+            return [...state]
+        case "FORCEPAUSEALL":
+            return [...state]
         default:
             return state
     }

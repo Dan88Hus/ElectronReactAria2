@@ -30,7 +30,6 @@ export const addUriAction = (link) => async (dispatch, getState) => {
 }
 
 export const tellStatus = () => async (dispatch) => {
-    console.log("tellStatus started")
     dispatch({
         type: "TELLSTATUS",
     })
@@ -103,6 +102,50 @@ export const forceRemoveAction = (id, gid) => async (dispatch, getState) => {
             console.log("REMOVE",JSON.stringify(response.data));
             dispatch({
                 type: "FORCEREMOVE",
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+export const unPauseAllAction = (id, gid) => async (dispatch, getState) => {
+    let data = `{"id":"${id}","jsonrpc":"2.0","method": "aria2.unpauseAll", "params": ["${gid}"]}`;
+    let config = {
+        method: 'post',
+        url: 'http://127.0.0.1:6800/jsonrpc',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        data: data
+    };
+    axios(config)
+        .then(function (response) {
+            // console.log("UNPAUSE",JSON.stringify(response.data));
+            dispatch({
+                type: "UNPAUSEALL",
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+export const forcePauseAllAction = (id, gid) => async (dispatch, getState) => {
+    let data = `{"id":"${id}","jsonrpc":"2.0","method": "aria2.forcePauseAll", "params": ["${gid}"]}`;
+    let config = {
+        method: 'post',
+        url: 'http://127.0.0.1:6800/jsonrpc',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        data: data
+    };
+    axios(config)
+        .then(function (response) {
+            // console.log("UNPAUSE",JSON.stringify(response.data));
+            dispatch({
+                type: "FORCEPAUSEALL",
             })
         })
         .catch(function (error) {
