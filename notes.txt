@@ -1,7 +1,0 @@
-Redux state: {"uri":[{"id":"759481677","gid":"2a73d356c2c7e18f","status":"complete","progress":"100.00","path":"/home/dev/file_example_MP4_1920_18MG.7.mp4"}]}
-
-ERA:         {"uri":[{"id":"42466922","gid":"30ef4cdaa306d392","status":"complete","progress":"100.00","path":"/home/dev/file_example_MP4_1920_18MG.13.mp4"}]}
-
-localStorage.setItem('ERA',JSON.stringify({id: task.id ,gid: response.data.result.gid, status: response.data.result.status, progress: progressPercent, path: response.data.result.files[0].path}))
-
-persist:root : {"uri":"[{\"id\":\"193042853\",\"gid\":\"70e4442d1f8947ea\",\"status\":\"paused\",\"progress\":\"34.53\",\"path\":\"/home/dev/file_example_MP4_1920_18MG.20.mp4\"}]","_persist":"{\"version\":-1,\"rehydrated\":true}"}

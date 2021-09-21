@@ -1,4 +1,4 @@
-const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer')
+const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer')
 const { app, BrowserWindow, Menu, Tray } = require("electron")
 
 const path = require('path')
@@ -16,7 +16,6 @@ function createWindow() {
         minHeight: 400,
         backgroundColor: 'white',
         webPreferences: {
-            // nativeWindowOpen: true,
             nodeIntegration: true,
             worldSafeExecuteJavascript: true,
             contextIsolation: false

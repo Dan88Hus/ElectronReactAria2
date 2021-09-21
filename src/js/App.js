@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import entry from '../../entry'
 import { useSelector, useDispatch } from 'react-redux'
 
 import TaskButtons from './components/TaskButtons'
@@ -14,7 +13,6 @@ function App() {
 
     useEffect(()=>{
         console.log("app useEffect")
-        console.log("STATE", stateU)
     },[])
 
     return (

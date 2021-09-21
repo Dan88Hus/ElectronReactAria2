@@ -1,17 +1,5 @@
-import Aria2 from "aria2";
-import ws from "ws";
-import nodefetch from "node-fetch";
+
 import axios from "axios";
-
-const options = {
-    host: 'localhost',
-    port: 6800,
-    secure: false,
-    secret: 'secret',
-    path: '/jsonrpc',
-}
-
-const aria2 = new Aria2({ WebSocket: ws, fetch: nodefetch, ...options });
 
 
 export const addUriAction = (link) => async (dispatch, getState) => {
@@ -27,7 +15,7 @@ export const addUriAction = (link) => async (dispatch, getState) => {
     
     await axios(config)
         .then(function (response) {
-            console.log(response.data.id);
+            // console.log(response.data.id);
             dispatch({
                 type: "ADDURI",
                 payload: {
@@ -41,7 +29,7 @@ export const addUriAction = (link) => async (dispatch, getState) => {
         });
 }
 
-export const tellStatus = () => async (dispatch, getState) => {
+export const tellStatus = () => async (dispatch) => {
     console.log("tellStatus started")
     dispatch({
         type: "TELLSTATUS",
@@ -50,9 +38,6 @@ export const tellStatus = () => async (dispatch, getState) => {
 
 
 export const pauseAction = (id, gid) => async (dispatch, getState) => {
-
-    console.log("pauseAction Called", id, 'GID', gid)
-
     let data = `{"id":"${id}","jsonrpc":"2.0","method": "aria2.pause", "params": ["${gid}"]}`;
     let config = {
         method: 'post',
@@ -64,7 +49,7 @@ export const pauseAction = (id, gid) => async (dispatch, getState) => {
     };
     axios(config)
         .then(function (response) {
-            console.log(JSON.stringify(response.data));
+            // console.log(JSON.stringify(response.data));
             dispatch({
                 type: "PAUSE",
             })
@@ -72,13 +57,55 @@ export const pauseAction = (id, gid) => async (dispatch, getState) => {
         .catch(function (error) {
             console.log(error);
         });
-
 }
 
 export const purgeLocalStorage = () => async (dispatch, getState) => {
 
-    console.log("purgeLocalStorage Called")
     dispatch({
         type: "PURGELOCALSTORAGE",
     })
+}
+
+export const unPauseAction = (id, gid) => async (dispatch, getState) => {
+    let data = `{"id":"${id}","jsonrpc":"2.0","method": "aria2.unpause", "params": ["${gid}"]}`;
+    let config = {
+        method: 'post',
+        url: 'http://127.0.0.1:6800/jsonrpc',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        data: data
+    };
+    axios(config)
+        .then(function (response) {
+            // console.log("UNPAUSE",JSON.stringify(response.data));
+            dispatch({
+                type: "UNPAUSE",
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+export const forceRemoveAction = (id, gid) => async (dispatch, getState) => {
+    let data = `{"id":"${id}","jsonrpc":"2.0","method": "aria2.forceRemove", "params": ["${gid}"]}`;
+    let config = {
+        method: 'post',
+        url: 'http://127.0.0.1:6800/jsonrpc',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        data: data
+    };
+    axios(config)
+        .then(function (response) {
+            console.log("REMOVE",JSON.stringify(response.data));
+            dispatch({
+                type: "FORCEREMOVE",
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }

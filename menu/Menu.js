@@ -30,7 +30,7 @@ exports.createTemplate = app => {
                             }
                         })
 
-                        // load the index.html of the app.
+                        // load the report.html of the app.
                         mainWindow.loadFile('report.html')
                     }
 

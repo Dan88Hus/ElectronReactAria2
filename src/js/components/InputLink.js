@@ -9,7 +9,6 @@ function InputLink() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        // dispatch edilecek
         await dispatch(addUriAction(link))
     }
 

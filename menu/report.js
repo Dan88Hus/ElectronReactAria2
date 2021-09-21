@@ -1,12 +1,6 @@
-// document.body.onload = addElement;
 const localSItems = window.localStorage.getItem('persist:root')
-
 const objLocalSItems = JSON.parse(localSItems)
 const obUriSitems = JSON.parse(objLocalSItems.uri)
-
-const statusTd = document.getElementById('statusTd')
-const progressTd = document.getElementById('progressTd')
-const pathTd = document.getElementById('pathTd')
 const tbody = document.getElementById('tbody')
 
 if(localSItems){
