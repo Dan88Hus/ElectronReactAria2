@@ -10,7 +10,6 @@ function TaskButtons() {
     const dispatch = useDispatch()
 
     const handleClickClear = async () =>{
-        console.log("clear history clicked")
         dispatch(purgeLocalStorage())
         //no need to purge if redux return [] state
         await persistor.purge()
@@ -19,7 +18,6 @@ function TaskButtons() {
 
     return (
         <div className="m-2 text-center">
-
             <li className="btn btn-secondary m-1">Pasuse All</li>
             <li className="btn btn-secondary m-1">Resume All</li>
             <li className="btn btn-secondary m-1">Remove Task</li>

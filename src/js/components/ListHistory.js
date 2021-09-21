@@ -8,10 +8,9 @@ function ListHistory({ u }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log("ListHistory useEffect")
         const interval = setInterval(() => {
             dispatch(tellStatus())
-        }, 3000);
+        }, 300);
     }, [])
     
     

@@ -45,7 +45,6 @@ function App() {
                         ))}
                     </tbody>
                 </table>
-                <pre>{JSON.stringify(uri)}</pre>
             </div>
         </div >
     )

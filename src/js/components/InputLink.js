@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { addUriAction, tellStatus } from '../store/actions/taskActions'
+import { addUriAction } from '../store/actions/taskActions'
 
 function InputLink() {
     const [link, setLink] = useState('')
@@ -23,7 +23,6 @@ function InputLink() {
                     <button type="submit" className="btn btn-success mb-3">Start Download</button>
                 </div>
             </form>
-            <pre>{JSON.stringify(uri)}</pre>
         </div>
     )
 }
