@@ -1,5 +1,8 @@
 import { createStore, combineReducers, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
+// here
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 //Reducers will be imported in here
 import {taskReducer} from './reducers/taskReducers'
@@ -9,11 +12,18 @@ import {taskReducer} from './reducers/taskReducers'
 const reducer = combineReducers({
     uri: taskReducer
 })
-
 const middleware = [thunk]
 
-const store = createStore(
-    reducer
-    ,applyMiddleware(...middleware)
-)
-export default store
+// here
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, reducer)
+
+export default () => {
+  let store = createStore(persistedReducer,{}, applyMiddleware(...middleware))
+  let persistor = persistStore(store)
+  return { store, persistor }
+}
