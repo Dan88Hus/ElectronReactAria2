@@ -3,7 +3,6 @@ const localSItems = window.localStorage.getItem('persist:root')
 
 const objLocalSItems = JSON.parse(localSItems)
 const obUriSitems = JSON.parse(objLocalSItems.uri)
-console.log("obUriSitems",obUriSitems)
 
 const statusTd = document.getElementById('statusTd')
 const progressTd = document.getElementById('progressTd')

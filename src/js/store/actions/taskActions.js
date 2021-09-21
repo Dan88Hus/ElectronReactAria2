@@ -75,10 +75,10 @@ export const pauseAction = (id, gid) => async (dispatch, getState) => {
 
 }
 
-export const updateLocalSaction = () => async (dispatch, getState) => {
+export const purgeLocalStorage = () => async (dispatch, getState) => {
 
-    console.log("updateLocalSaction Called")
+    console.log("purgeLocalStorage Called")
     dispatch({
-        type: "UPDATEreduxSTORE",
+        type: "PURGELOCALSTORAGE",
     })
 }

@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import TaskButtons from './components/TaskButtons'
 import InputLink from './components/InputLink'
 import ListHistory from './components/ListHistory'
-import { updateLocalSaction } from './store/actions/taskActions'
 
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
     useEffect(()=>{
         console.log("app useEffect")
         console.log("STATE", stateU)
-        dispatch(updateLocalSaction())
     },[])
 
     return (
