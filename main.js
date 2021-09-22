@@ -3,7 +3,8 @@ const { app, BrowserWindow, Menu, Tray } = require("electron")
 
 const path = require('path')
 const url = require('url')
-const trayIcon = path.join(__dirname, 'assets', 'images', 'downloadicon.ico');
+const trayIcon = path.join(__dirname, 'assets', 'images', 'downloadicon.png');
+const trayIconIco = path.join(__dirname, 'assets', 'images', 'downloadicon.ico');
 const isDev = !app.isPackaged
 
 let mainWindow
@@ -15,6 +16,7 @@ function createWindow() {
         minWidth: 360,
         minHeight: 400,
         backgroundColor: 'white',
+        icon:trayIconIco,
         webPreferences: {
             nodeIntegration: true,
             worldSafeExecuteJavascript: true,
@@ -53,9 +55,12 @@ app.on('ready', () => {
     const template = require('./menu/Menu').createTemplate(app)
     const menu = Menu.buildFromTemplate(template)
     Menu.setApplicationMenu(menu)
-    // tray icon is not working on Linux
-    if (process.platform === 'darwin'){
-        tray = new Tray('/assets/images/downloadicon.ico')
+    if (process.platform === "win32"){
+        tray = new Tray(trayIconIco)
+        tray.setContextMenu(menu)
+    }
+    if (process.platform === "darwin" || "linux"){
+        tray = new Tray(trayIcon)
         tray.setContextMenu(menu)
     }
     // add react developer tools to chromium

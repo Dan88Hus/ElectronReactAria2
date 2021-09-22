@@ -16,7 +16,6 @@ function TaskButtons() {
 
     }
     const handleClickPause = () =>{
-        console.log("pauseAll clicked")
         dispatch(forcePauseAllAction(0,0))
     }
 

@@ -12,22 +12,28 @@ function ListHistory({ u }) {
             dispatch(tellStatus())
         }, 300);
     }, [])
-    
-    
-    const handlePause = (u)=>{
-        if(u.status !== "complete" || 'paused'){
+
+
+    const handlePause = (u) => {
+        if(u.status === "paused"){
+            return false
+        } else if (u.status !== "complete"){
             dispatch(pauseAction(u.id, u.gid))
         }
     }
-    const handleResume = (u)=>{
-        if(u.status !== "complete"){
+    const handleResume = (u) => {
+        if (u.status === "removed") {
+            return false
+        } else if (u.status !== "complete"){
             dispatch(unPauseAction(u.id, u.gid))
-        }
+        } 
     }
-    const handleStop = (u)=>{
-        console.log(u.status)
-        if(u.status !== "complete"){
-            console.log("stop clicked")
+    const handleStop = (u) => {
+        if (u.status === "paused") {
+            return false
+        } else if (u.status === "removed"){
+            return false
+        } else if (u.status !== "complete") {
             dispatch(forceRemoveAction(u.id, u.gid))
         }
     }
@@ -40,9 +46,9 @@ function ListHistory({ u }) {
                 <td className="text-center">{u.progress}</td>
                 <td>{u.path}</td>
                 {/* This can be in one Button with Ternary operator*/}
-                <td><button className="btn btn-light" onClick={(()=>handlePause(u))}>||</button></td>
-                <td><button className="btn btn-light" onClick={(()=>handleResume(u))}>&#9656;</button></td>
-                <td><button className="btn btn-light" onClick={(()=>handleStop(u))}>&#128721;</button></td>
+                <td><button className="btn btn-light" onClick={(() => handlePause(u))}>||</button></td>
+                <td><button className="btn btn-light" onClick={(() => handleResume(u))}>&#9656;</button></td>
+                <td><button className="btn btn-light" onClick={(() => handleStop(u))}>&#128721;</button></td>
             </tr>
         </React.Fragment>
     )

@@ -13,7 +13,6 @@ function App() {
     const uri = useSelector(state => state.uri)
 
     useEffect(()=>{
-        console.log("app useEffect")
         // 0,0 is dummy data
         dispatch(unPauseAllAction(0,0))
     },[])

@@ -99,7 +99,7 @@ export const forceRemoveAction = (id, gid) => async (dispatch, getState) => {
     };
     axios(config)
         .then(function (response) {
-            console.log("REMOVE",JSON.stringify(response.data));
+            // console.log("REMOVE",JSON.stringify(response.data));
             dispatch({
                 type: "FORCEREMOVE",
             })
