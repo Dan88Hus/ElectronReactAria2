@@ -1,12 +1,20 @@
 {
   "name": "aria-react",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "aria2-react-electron",
   "main": "main.js",
   "scripts": {
     "test": "node main.js",
     "start": "electron .",
-    "watch": "webpack --config webpack.common.js --watch"
+    "watch": "webpack --config webpack.common.js --watch",
+    "postinstall": "electron-builder install-app-deps",
+    "build": "webpack --config webpack.prod.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dust": "electron-builder build",
+    "make:linux": "electron-builder --linux",
+    "make:macos": "electron-builder --mac",
+    "make:win": "electron-builder --win --x64"
   },
   "repository": {
     "type": "commonjs",
@@ -24,11 +32,62 @@
     "url": "https://github.com/Dan88Hus/ElectronReactAria2/issues"
   },
   "homepage": "https://github.com/Dan88Hus/ElectronReactAria2#readme",
+  "build": {
+    "productName": "ERA",
+    "appId": "com.target.era",
+    "files": [
+      "build/**/*",
+      "assets/**/*",
+      "menu/**/*",
+      "src/**/*",
+      "index.html",
+      "report.html",
+      "main.js"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "assets/images/donloadicon.png",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 530,
+          "y": 320,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "icon": "assets/images/downloadicon.png",
+      "target": [
+        "nsis"
+      ],
+      "publisherName": "Huseyin Ozdogan"
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "category": "Utility",
+      "maintainer": "huseyinozdogan@gmail.com",
+      "synopsis": "Fast Download manager based on aria2",
+      "icon": "assets/images/downloadicon.ico"
+    }
+  },
   "devDependencies": {
     "electron": "^14.0.1",
+    "electron-builder": "^22.11.7",
     "electron-devtools-installer": "^3.2.0",
     "electron-reload": "^2.0.0-alpha.1",
-    "webpack": "^5.53.0"
+    "webpack": "^5.53.0",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "@babel/core": "^7.15.5",

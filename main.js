@@ -1,10 +1,10 @@
-const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer')
+// const { default: installExtension, REDUX_DEVTOOLS } = require('electron-devtools-installer')
 const { app, BrowserWindow, Menu, Tray } = require("electron")
 
 const path = require('path')
 const url = require('url')
-const trayIcon = path.join(__dirname, 'assets', 'images', 'downloadicon.png');
-const trayIconIco = path.join(__dirname, 'assets', 'images', 'downloadicon.ico');
+const trayIcon = path.join(__dirname, 'assets', 'images', '256x256.png');
+const trayIconIco = path.join(__dirname, 'assets', 'images', '256x256.ico');
 const isDev = !app.isPackaged
 
 let mainWindow
@@ -16,11 +16,10 @@ function createWindow() {
         minWidth: 360,
         minHeight: 400,
         backgroundColor: 'white',
-        icon:trayIconIco,
         webPreferences: {
-            nodeIntegration: true,
+            nodeIntegration: false,
             worldSafeExecuteJavascript: true,
-            contextIsolation: false
+            contextIsolation: true
         }
     })
 
@@ -31,17 +30,17 @@ function createWindow() {
         slashes: true
     }))
 
-    // Open the DevTools.
-    isDev && mainWindow.webContents.openDevTools()
-    // reload configuration
-    if (isDev) {
-        require('electron-reload')(__dirname, {
-            electron: path.join(__dirname, 'node_modules', '.bin', 'electron'), hardResetMethod: 'exit'
-            // electron: require(`${__dirname}/node_modules/electron`)
-        })
-    } else {
-        console.log("!isDev")
-    }
+    // // Open the DevTools.
+    // isDev && mainWindow.webContents.openDevTools()
+    // // reload configuration
+    // if (isDev) {
+    //     require('electron-reload')(__dirname, {
+    //         electron: path.join(__dirname, 'node_modules', '.bin', 'electron'), hardResetMethod: 'exit'
+    //         // electron: require(`${__dirname}/node_modules/electron`)
+    //     })
+    // } else {
+    //     console.log("!isDev")
+    // }
 }
 
 if (process.platform === 'darwin') {
@@ -64,9 +63,10 @@ app.on('ready', () => {
         tray.setContextMenu(menu)
     }
     // add react developer tools to chromium
-    isDev && installExtension(REDUX_DEVTOOLS)
-        .then((name) => console.log(`Added Extension:  ${name}`))
-        .catch((err) => console.log('An error occurred: ', err))
+    // console.log(isDev)
+    // isDev && installExtension(REDUX_DEVTOOLS)
+    //     .then((name) => console.log(`Added Extension:  ${name}`))
+    //     .catch((err) => console.log('An error occurred: ', err))
     createWindow()
 
 })
